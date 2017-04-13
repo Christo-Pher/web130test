@@ -1,0 +1,37 @@
+@import 'bourbon/bourbon';
+
+$smallMax: 39.9em; 
+$mediumMin: 40em;  //640px
+$mediumMax: 63.9em; //1024px
+$largeMin: 64em;
+
+@mixin size($size) {
+    @if $size == small {
+        @media screen and (max-width: $smallMax) {
+            @content;
+        }
+    } 
+    @else if $size == medium {
+        @media screen and (min-width: $mediumMin) and (max-width: $mediumMax) {
+            @content;
+        } 
+    }
+    @else if $size == large {
+        @media screen and (min-width: $largeMin) {
+            @content;
+        }
+    }
+}
+
+article {
+    margin: 0 5%;
+    @include size(small) {
+        @include columns(1);
+    }
+    @include size(medium) {
+        @include columns(2);
+    }
+    @include size(large) {
+        @include columns(3);
+    }
+}

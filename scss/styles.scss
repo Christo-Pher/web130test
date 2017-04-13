@@ -1,0 +1,61 @@
+@import 'bourbon/bourbon';
+
+
+
+//variable
+$brandBlue: #4286f4;
+$supportGray: #9ea5af;
+
+//creating a mixin (complete with arguments)
+@mixin fancyDiv($padding, $bgColor, $bdColor, $boxShdColor) {
+    padding: $padding;
+    background: $bgColor;
+    border: $bdColor 2px solid;
+    box-shadow: 2px 2px 2px rgba($boxShdColor, .3);
+    @include transform(rotate(-5deg));
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+//calling a mixin(with an argument)
+div {
+    height: 200px;
+    width: 600px;
+    @include fancyDiv(20px, $supportGray, $brandBlue, black);
+}
+
+
+
+@mixin size($size) {
+    @if $size == small {
+        @media screen and (max-width: 40em) {
+            @content;
+        }
+    } @else if $size == medium {
+        @media screen and (min-width: 40.1em) and (max-width: 64em) {
+            @content;
+        } 
+    }@else if $size == large {
+        @media screen and (min-width: 64.1em){
+            @content;
+        }
+    }
+}
+
+
+
+
+article {
+    margin: 0 5%;
+    @include size(small) {
+        width: 90%;
+    }
+    @include size(medium) {
+        float: left;
+        width: 40%;
+    }
+    @include size(large) {
+        
+    }
+}
